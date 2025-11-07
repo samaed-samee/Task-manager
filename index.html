@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTask Manager</title>
+
+  <!-- Core styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 class="brand">
+        <i class="fas fa-tasks-alt"></i> DevTask Manager
+      </h1>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="add-task-btn" class="primary-btn">
+          <i class="fas fa-plus"></i> Add New Tasks
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <section class="toolbar">
+      <div class="search">
+        <i class="fas fa-search"></i>
+        <input id="search-input" type="search"
+               placeholder="Search title or description..." />
+      </div>
+      <div class="filters">
+        <select id="filter-category" aria-label="Filter by category">
+          <option value="all">All categories</option>
+          <option value="Feature">Feature</option>
+          <option value="Bug">Bug</option>
+          <option value="Refactor">Refactor</option>
+          <option value="Testing">Testing</option>
+          <option value="Documentation">Documentation</option>
+        </select>
+        <select id="filter-priority" aria-label="Filter by priority">
+          <option value="all">All priorities</option>
+          <option value="High">High</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+    </section>
+
+    <main class="kanban-board">
+      <div class="kanban-column glass" id="todo-column">
+        <h2 class="column-title">
+          <span><i class="fas fa-list-ul"></i> To Do</span>
+          <span class="count-badge" id="todo-count">0</span>
+        </h2>
+        <div class="tasks-container" id="todo-tasks"></div>
+      </div>
+
+      <div class="kanban-column glass" id="inprogress-column">
+        <h2 class="column-title">
+          <span><i class="fas fa-spinner"></i> In Progress</span>
+          <span class="count-badge" id="inprogress-count">0</span>
+        </h2>
+        <div class="tasks-container" id="inprogress-tasks"></div>
+      </div>
+
+      <div class="kanban-column glass" id="done-column">
+        <h2 class="column-title">
+          <span><i class="fas fa-check-circle"></i> Done</span>
+          <span class="count-badge" id="done-count">0</span>
+        </h2>
+        <div class="tasks-container" id="done-tasks"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Task Modal -->
+  <div id="task-modal" class="modal-container">
+    <div class="modal-content glass">
+      <span class="close-modal" role="button" aria-label="Close">&times;</span>
+      <h2 class="modal-title">Add New Task</h2>     <!-- NEW: title element -->
+      <form id="task-form">
+        <div class="form-group">
+          <label for="task-title">Title</label>
+          <input type="text" id="task-title" placeholder="e.g., Implement new login API" required>
+        </div>
+        <div class="form-group">
+          <label for="task-desc">Description</label>
+          <textarea id="task-desc" rows="3" placeholder="Add more details about the task..."></textarea>
+        </div>
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="task-category">Category</label>
+            <select id="task-category">
+              <option value="Feature">Feature</option>
+              <option value="Bug">Bug</option>
+              <option value="Refactor">Refactor</option>
+              <option value="Testing">Testing</option>
+              <option value="Documentation">Documentation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-priority">Priority</label>
+            <select id="task-priority">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task-due-date">Due Date</label>
+          <input type="date" id="task-due-date">
+        </div>
+        <button type="submit" class="primary-btn full-width">Add Task</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

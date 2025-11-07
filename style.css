@@ -1,0 +1,284 @@
+/* ==========================================================
+   Basic reset & theme tokens
+   ========================================================== */
+:root {
+  --font-family: 'Poppins', sans-serif;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 18px;
+  --shadow-1: 0 6px 24px rgba(0,0,0,0.18);
+  --shadow-2: 0 10px 35px rgba(0,0,0,0.24);
+  --easing: cubic-bezier(.2,.8,.2,1);
+  --accent: #e94560;
+  --accent-2: #7c4dff;
+  --success: #2ecc71;
+  --warn: #ffab40;
+  --danger: #ff4d4d;
+
+  /* Light defaults overridden by data-theme */
+  --bg: #0b1220;
+  --bg-soft: #0f1629;
+  --surface: rgba(255,255,255,0.06);
+  --surface-2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.14);
+  --text: #e8e8f0;
+  --text-dim: #aab0c0;
+  --input-bg: rgba(255,255,255,0.06);
+}
+
+html[data-theme="light"] {
+  --bg: #f5f7fb;
+  --bg-soft: #eaf0ff;
+  --surface: rgba(255,255,255,0.85);
+  --surface-2: rgba(255,255,255,0.9);
+  --border: rgba(0,0,0,0.08);
+  --text: #1c2030;
+  --text-dim: #4d5771;
+  --input-bg: rgba(0,0,0,0.04);
+}
+
+/* ==========================================================
+   Global layout
+   ========================================================== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--text);
+  background:
+      radial-gradient(1200px 600px at -10% -20%, rgba(124,77,255,0.25), transparent 60%),
+      radial-gradient(800px 400px at 110% 120%, rgba(233,69,96,0.22), transparent 60%),
+      linear-gradient(180deg, var(--bg-soft), var(--bg));
+  line-height: 1.6;
+}
+
+/* Scrollbar */
+*::-webkit-scrollbar { height: 10px; width: 10px; }
+*::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius: 20px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* App container */
+.app-container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+/* ==========================================================
+   Header
+   ========================================================== */
+.app-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.brand {
+  font-weight: 700; letter-spacing: 0.3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: flex; gap: 10px; align-items: center;
+}
+.brand i { transform: rotate(-10deg); }
+
+.header-actions { display: flex; gap: 10px; align-items: center; }
+
+/* ==========================================================
+   Buttons
+   ========================================================== */
+.primary-btn {
+  background: linear-gradient(45deg, var(--accent), #f76c82);
+  color: white; border: none;
+  padding: 10px 16px; border-radius: var(--radius-s);
+  font-weight: 600; cursor: pointer;
+  transition: transform .2s var(--easing), box-shadow .2s var(--easing), filter .2s var(--easing);
+  box-shadow: 0 4px 14px rgba(233,69,96,0.35);
+}
+.primary-btn:hover { transform: translateY(-1px); filter: brightness(1.03); }
+.primary-btn:active { transform: translateY(0); }
+
+.icon-btn {
+  height: 40px; width: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: transform .2s var(--easing), background .2s var(--easing);
+}
+.icon-btn:hover { transform: translateY(-1px); background: var(--surface-2); }
+.icon-btn i { font-size: 1rem; }
+
+/* ==========================================================
+   Toolbar
+   ========================================================== */
+.toolbar {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.search {
+  flex: 1 1 320px; display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-s);
+  padding: 10px 12px;
+  backdrop-filter: blur(12px) saturate(120%);
+}
+.search input {
+  background: transparent; border: none; outline: none; color: var(--text);
+  width: 100%; font-size: 0.95rem;
+}
+.filters { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+select {
+  appearance: none;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  min-width: 160px;
+  outline: none;
+}
+
+/* ==========================================================
+   Kanban board
+   ========================================================== */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+}
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: var(--shadow-1);
+}
+.kanban-column { display: flex; flex-direction: column; padding: 14px; }
+
+.column-title {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 6px 12px 6px;
+  border-bottom: 1px dashed var(--border);
+  position: sticky; top: 0; z-index: 1; background: transparent;
+}
+.column-title i { color: var(--accent); margin-right: 8px; }
+.count-badge {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white; padding: 2px 10px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700;
+}
+.tasks-container { padding-top: 10px; min-height: 200px; }
+
+/* ==========================================================
+   Task card
+   ========================================================== */
+.task-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: transform .2s var(--easing), box-shadow .2s var(--easing), background .2s var(--easing);
+  cursor: default;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  animation: cardIn .4s var(--easing) forwards;
+  animation-delay: calc(var(--stagger, 0) * 40ms);
+}
+.task-card:hover,
+.task-card:focus {
+  transform: translateY(-2px) scale(1.005);
+  box-shadow: var(--shadow-2);
+  outline: 2px solid var(--accent);
+}
+@keyframes cardIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.task-card.deleting { animation: slideOut .35s var(--easing) forwards; }
+@keyframes slideOut { to { opacity: 0; transform: translateX(-40px) scale(0.96); } }
+
+.task-card h4 { margin: 0 0 6px 0; font-weight: 600; }
+.task-description { margin: 0 0 10px 0; color: var(--text-dim); font-size: .92rem; }
+
+.task-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 8px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.chip.priority.high { background: rgba(255,77,77,0.15); color: #ff9999; border-color: rgba(255,77,77,0.35); }
+.chip.priority.medium { background: rgba(255,171,64,0.15); color: #ffcd99; border-color: rgba(255,171,64,0.35); }
+.chip.priority.low { background: rgba(64,169,255,0.15); color: #a7d4ff; border-color: rgba(64,169,255,0.35); }
+.task-date { color: var(--text-dim); }
+.task-date.overdue { color: var(--danger); font-weight: 700; }
+
+.task-actions { display: flex; gap: 10px; }
+.task-actions button {
+  background: transparent; border: none; color: var(--text-dim); cursor: pointer;
+  font-size: 1rem; transition: color .2s var(--easing), transform .2s var(--easing);
+}
+.task-actions button:hover { color: var(--accent); transform: translateY(-1px); }
+
+/* ==========================================================
+   Modal
+   ========================================================== */
+.modal-container {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.5);
+  justify-content: center; align-items: center;
+  animation: fadeIn .25s var(--easing);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-content {
+  width: 92%; max-width: 520px; position: relative; padding: 26px;
+  animation: slideDown .35s var(--easing);
+}
+@keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close-modal {
+  position: absolute; top: 16px; right: 18px;
+  color: var(--text-dim); font-size: 28px; font-weight: 700; cursor: pointer;
+}
+.close-modal:hover { color: var(--text); }
+
+.form-group { margin-bottom: 14px; }
+.form-group-row { display: flex; gap: 14px; }
+.form-group-row .form-group { flex: 1; }
+label {
+  display: block; margin-bottom: 6px; font-weight: 600; font-size: .9rem;
+  color: var(--text-dim);
+}
+input[type="text"], input[type="date"], textarea, select {
+  width: 100%; padding: 10px 12px; border-radius: var(--radius-s);
+  background: var(--input-bg); color: var(--text);
+  border: 1px solid var(--border);
+  outline: none; transition: border-color .2s var(--easing), box-shadow .2s var(--easing);
+}
+textarea { resize: vertical; }
+input::placeholder, textarea::placeholder { color: #7d86a3; }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(233,69,96,0.22);
+}
+.primary-btn.full-width { width: 100%; padding: 12px; margin-top: 10px; }
+
+/* Accessible focus only for keyboard users */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 768px) {
+  .app-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .form-group-row { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 500px) {
+  .kanban-board { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================
+   Reduced motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
