@@ -33,7 +33,7 @@ devtask-manager/
 
 1. **Download or clone** this repository:
    ```bash
-   git clone https://github.com/your-username/devtask-manager.git
+   git clone [https://github.com/your-username/devtask-manager.git](https://github.com/samaed-samee/Task-manager.git)
    ```
 
 2. Open the project folder and double-click **`index.html`**.  
